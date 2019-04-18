@@ -3,7 +3,8 @@
 const path = require ('path');
 const {resolve, join} = path;
 
-require ('..');
+const hazard = require ('..');
+console.log(hazard)
 
 const {expect} = require ('chai');
 
@@ -18,7 +19,7 @@ describe ('hazardous', function () {
   );
 
   it ('#join (packed)', function () {
-    const res = path.join (
+    const res = hazard.join (
       __dirname,
       'app.asar/node_modules/packed/packed.file'
     );
@@ -26,7 +27,7 @@ describe ('hazardous', function () {
   });
 
   it ('#join (unpacked)', function () {
-    const res = path.join (
+    const res = hazard.join (
       __dirname,
       'app.asar/node_modules/unpacked/unpacked.file'
     );
@@ -34,14 +35,14 @@ describe ('hazardous', function () {
   });
 
   it ('#normalize (packed)', function () {
-    const res = path.normalize (
+    const res = hazard.normalize (
       join (__dirname, 'app.asar/../app.asar/node_modules/packed/packed.file')
     );
     expect (res).to.be.equal (fullPacked);
   });
 
   it ('#normalize (unpacked)', function () {
-    const res = path.normalize (
+    const res = hazard.normalize (
       join (
         __dirname,
         'app.asar/../app.asar/node_modules/unpacked/unpacked.file'
@@ -51,14 +52,14 @@ describe ('hazardous', function () {
   });
 
   it ('#resolve (packed)', function () {
-    const res = path.resolve (
+    const res = hazard.resolve (
       join (__dirname, 'app.asar', '/node_modules/packed/packed.file')
     );
     expect (res).to.be.equal (fullPacked);
   });
 
   it ('#resolve (unpacked)', function () {
-    const res = path.resolve (
+    const res = hazard.resolve (
       join (__dirname, 'app.asar', '/node_modules/unpacked/unpacked.file')
     );
     expect (res).to.be.equal (fullUnpacked); // .unpacked
